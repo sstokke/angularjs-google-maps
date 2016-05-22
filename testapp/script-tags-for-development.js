@@ -1,5 +1,6 @@
 document.write([
-  '<script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>',
+  '<script src="https://maps.google.com/maps/api/js?key=AIzaSyB4hv_5-G-7o2RbjNzLi5_d0MSHQtq_LgQ&libraries=placeses,visualization,drawing,geometry,places"></script>',
+  '<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>',
   '<script src="lib/angular.js"></script>',
   '<script src="../app.js"></script>',
   '<script src="../controllers/map-controller.js"></script>',

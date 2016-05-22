@@ -4,75 +4,68 @@
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <script src="script-tags-for-development.js"></script>
 <script src="taxi-data.js"></script>
-<script>
-  var app = angular.module('myapp', ['ngMap']);
-  app.controller('LayerHeatmapCtrl', function(NgMap) {
-    var heatmap, vm = this;
-    NgMap.getMap().then(function(map) {
-      vm.map = map;
-      heatmap = vm.map.heatmapLayers.foo;
-    });
-
-    vm.toggleHeatmap= function(event) {
-      heatmap.setMap(heatmap.getMap() ? null : vm.map);
-    };
-
-    vm.changeGradient = function() {
-      var gradient = [
-        'rgba(0, 255, 255, 0)',
-        'rgba(0, 255, 255, 1)',
-        'rgba(0, 191, 255, 1)',
-        'rgba(0, 127, 255, 1)',
-        'rgba(0, 63, 255, 1)',
-        'rgba(0, 0, 255, 1)',
-        'rgba(0, 0, 223, 1)',
-        'rgba(0, 0, 191, 1)',
-        'rgba(0, 0, 159, 1)',
-        'rgba(0, 0, 127, 1)',
-        'rgba(63, 0, 91, 1)',
-        'rgba(127, 0, 63, 1)',
-        'rgba(191, 0, 31, 1)',
-        'rgba(255, 0, 0, 1)'
-      ]
-      heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-    }
-
-    vm.changeRadius = function() {
-      heatmap.set('radius', heatmap.get('radius') ? null : 20);
-    }
-
-    vm.changeOpacity = function() {
-      heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
-    }
-  });
-</script>
+<script src="scripts/script.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/yeti/bootstrap.min.css">
+<link rel="stylesheet" href="lib/styles.css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-  <style>
-    div[ng-controller=LayerHeatmapCtrl] {
-      position:relative;
-    }
-    div[ng-controller=LayerHeatmapCtrl] #panel{
-      position: absolute;
-      top: 5px;
-      left: 50%;
-      margin-left: -180px;
-      z-index: 5;
-      background-color: #fff;
-      padding: 5px;
-      border: 1px solid #999;
-    }
-  </style>
-  <div ng-controller="LayerHeatmapCtrl as vm">
-    <div id="panel">
-      <button ng-click="vm.toggleHeatmap()">Toggle Heatmap</button>
-      <button ng-click="vm.changeGradient()">Change gradient</button>
-      <button ng-click="vm.changeRadius()">Change radius</button>
-      <button ng-click="vm.changeOpacity()">Change opacity</button>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">Food Truck Thing Doer</div>
+                <!--link to homepage-->
+            </div>
+            <div class="collapse navbar-collapse navbar-right">
+                <ul class="nav navbar-nav">
+                  <li class="active">
+                    <a href="#" >Login</a>
+                  </li>
+                  <li class="active">
+                    <p>Welcome</p>
+                  </li>
+                    <!--link to bottom of page with about us info-->
+                    <li><img class="img-rounded" style="height:50px; width:50px" id="profile_pic" src='https://pbs.twimg.com/profile_images/378800000822867536/3f5a00acf72df93528b6bb7cd0a4fd0c.jpeg' alt="profile pic"/></li>
+
+                    <!--link to bottom of page with about us info-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+<main class="row">
+        <div class="col-md-4 col-sm-4 col-xs-4" style="height: 1000px;">
+            <div class="panel panel-success" style="border-radius:10px">
+                <div class="panel-heading anotherColor" style="border-radius:10px">Step 1) Where are you?
+                </div>
+                <div class="panel-body">
+                    <form class="" action="index.html" method="post">
+                        Enter Address, City, State, or Zip:
+                        <input autofocus required id="location-address" type="text" style="border-radius:10px" class="form-control" placeholder="Street, City, State, and/or Postal Code"/>
+                        <button class="btn-warning newColor" id="map-address-btn" style="border-radius:10px">Enter Location</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <ng-map zoom="13" center="37.774546, -122.433523" map-type-id="SATELLITE">
-      <heatmap-layer id="foo" data="taxiData"></heatmap-layer>
-    </ng-map>
-  </div>
-</body>
-</html>
+    <div class="col-md-8 col-sm-8 col-xs-8" style="height: 1000px;">
+        <div class="panel panel-success" style="border-radius:10px">
+            <div class="panel-heading anotherColor" style="border-radius:10px">Where is the best place?
+            </div>
+
+            <div class="heatlayer" ng-controller="LayerHeatmapCtrl as vm" >
+                <div id="panel">
+                    <button ng-click="vm.toggleHeatmap()">Toggle Heatmap</button>
+                    <button ng-click="vm.changeGradient()">Change gradient</button>
+                    <button ng-click="vm.changeRadius()">Change radius</button>
+                    <button ng-click="vm.changeOpacity()">Change opacity</button>
+                </div>
+                <ng-map style="height:600px" zoom="13" center="47.6062, -122.3321" map-type-id="SATELLITE">
+                    <heatmap-layer data="taxiData"></heatmap-layer>
+                </ng-map>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end right div-->
+</main>
+<script type="text/javascript" src='scripts/script.js'></script>
+</body></html>
